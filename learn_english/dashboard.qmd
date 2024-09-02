@@ -1,0 +1,207 @@
+---
+title: "yoki learning english dashboard"
+format:
+  dashboard:
+    expandable: false
+    fig-retina: 1
+theme: Cerulean
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| warning: false
+
+library(tidyverse)
+```
+
+```{r}
+#| label: setup_data
+
+learn_event <- read_csv("datas/learn_event.csv") 
+learn_event <- learn_event %>%
+  fill(stage, .direction = 'down')
+learn_event %>% 
+  pointblank::expect_col_vals_not_null(
+    columns = everything()
+  )
+stage <- learn_event$stage %>% last()
+
+```
+
+## Row {scrolling="false"}
+
+My name is Yoki, currently studying at Grape Seed English School, in U2 stage. This is my learning english dashboard.
+
+## Row
+
+```{r}
+#| label: valuebox-data
+
+
+learned_hours <- learn_event %>% 
+  pull(hours) %>% 
+  sum()
+
+REP_days <- learn_event %>% 
+  filter(what == "REP") %>% 
+  pull(when) %>% 
+  n_distinct()
+
+school_days <- learn_event %>% 
+  filter(where == "grape seed") %>% 
+  pull(when) %>% 
+  n_distinct()
+
+# 从第4次开始上的课
+u1_start <- 3
+# 每个单元30节课
+n_per_unit <- 30
+
+
+stage_days <- learn_event %>% 
+  filter(where == "grape seed" & stage == !!stage) %>% 
+  n_distinct()
+stage_progress <- stage_days / n_per_unit
+
+cal_unspaced_days <- function() {
+  61
+}
+
+```
+
+```{r}
+#| label: learned hours
+#| content: valuebox
+#| title: "learned hours"
+
+list(
+  icon = "battery-half",
+  color = "primary",
+  value = learned_hours
+)
+```
+
+```{r}
+#| label: unspaced learning days
+#| content: valuebox
+#| title: "unspaced learning days"
+list(
+  icon = "battery-charging",
+  #color = "#B0E2FF",
+  color = "success",
+  value = cal_unspaced_days()
+)
+```
+
+```{r}
+#| label: REP
+#| content: valuebox
+#| title: "REP days"
+list(
+  icon = "bootstrap-reboot",
+  #color = "#A4D3EE",
+  color = "info",
+  value = REP_days
+)
+```
+
+```{r}
+#| label: school days
+#| content: valuebox
+#| title: "school days"
+list(
+  icon = "backpack2-fill",
+  #color = "#8DB6CD",
+  color = "light",
+  value = paste(school_days)
+)
+```
+
+```{r}
+#| label: U2 progress
+#| content: valuebox
+#| title: "U2 progress"
+
+val <- paste0(stage_days, 'd', '/', stage_progress %>% scales::percent())
+list(
+  icon = "backpack-fill",
+  #color = "#8DB6CD",
+  color = "secondary",
+  value = val
+)
+```
+
+## Row
+
+```{r}
+#| label: calendar
+#| title: "learn calendar"
+#| fig-showtext: true
+
+library(calendR)
+library(pointblank)
+
+date_range <- learn_event %>% 
+  pull(when) %>% 
+  range()
+day(date_range[1]) <- 1
+day(date_range[2]) <- days_in_month(month(date_range[2]))
+
+learn_flatten <- learn_event %>% 
+  separate_longer_delim(what, " ") %>% 
+  mutate(what = what %>% fct_relevel('TSI')) %>% 
+  group_by(when) %>% 
+  count(what) %>% 
+  summarise(
+    what = if_else(
+      n > 1,
+      str_c(what, n, sep = "x"),
+      what) %>% 
+      str_flatten(" ")
+    ) %>% 
+  col_vals_make_set(
+    what,
+    c('REP', 'TSI REP', 'TSI REPx2')
+  )
+
+plot_calend <- function(date, special.days) {
+  # cols <- c('REP' = "#B0E2FF", 'TSI REP' = "#CAE1FF", 'TSI REPx2' = "#87CEFA")
+  cols <- c('REP' = "#CAE1FF", 'TSI REP' = "#B0E2FF", 'TSI REPx2' = "#87CEFA")
+  special.col <- cols[special.days %>% na.omit() %>% unique()]
+  calendR(
+    from = min(date),
+    to = max(date),
+    title = "",
+    lty = 0,
+    special.days = special.days,
+    special.col = special.col,
+    bg.img = "images/calend_bg_cat.png",
+    mbg.col = "#b29a8e",
+    low.col = "#FFFAFA",
+    bg.col = "#faf4ef",
+    months.col = "white",
+    title.col="#7c6b63",
+    days.col="#6a5c55",
+    title.size = 0,    
+  	orientation = "p",
+    months.size = 10,
+    day.size = 4.5,
+    legend.pos = "top"
+  )
+}
+
+
+tibble(
+  when = seq.Date(date_range[1], date_range[2], 1),
+  grp = cut(when, '1 month')) %>% 
+  left_join(learn_flatten) %>% 
+  nest(.by = grp) %>% 
+  pull(data) %>% 
+  walk(
+    ~ with(.x, plot_calend(when, what)) %>% print()
+  )
+
+
+
+```
