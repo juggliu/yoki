@@ -1,0 +1,4 @@
+- source: dashboard.qmd
+  quarto-pub:
+    - id: dc35db00-9c13-4b96-b3df-67ed1a5e26ef
+      url: 'https://jensenliu.quarto.pub/yoki-learning-english-dashboard'
