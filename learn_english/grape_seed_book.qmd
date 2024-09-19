@@ -1,0 +1,207 @@
+---
+title: "grape seed book"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(tidytext)
+```
+
+```{r}
+read_book <- function(path) {
+  session_regex <- regex('^Session \\d+')
+  title_regex <- regex('^\\d+\\. (.*)')
+  
+  tibble(
+    book = tools::file_path_sans_ext(basename(path)),
+    text = read_lines(path)
+  ) %>% 
+    mutate(
+      line = row_number(),
+      session = cumsum(
+        str_detect(
+          text,
+          session_regex
+        )
+      ),
+      title = str_extract(text, title_regex, 1),
+      .before = text
+    ) %>% 
+    filter(str_detect(text, session_regex, negate = TRUE)) %>% 
+    fill(title, .direction = 'down') %>% 
+    filter(str_detect(text, title_regex, negate = TRUE))
+    
+}
+
+books_df <- list.files(
+  'datas',
+  pattern = 'U\\d+',
+  full.names = T
+) %>% 
+  map(read_book) %>% 
+  list_rbind()
+
+books_df
+```
+
+## 词频
+
+```{r}
+tidy_books <- books_df %>% 
+  unnest_tokens(word, text) %>% 
+  mutate(type = if_else(word %in% stop_words$word, 'stop words', 'normal'))
+
+tidy_books %>% 
+  summarise(n = n_distinct(word), .by = c(book, type)) %>% 
+  mutate(n_book = sum(n), .by = book) %>% 
+  ggplot(aes(book, n)) +
+  geom_col(aes(fill = type)) +
+  geom_label(aes(y = n_book, label = n_book)) +
+  labs(
+    y = 'n word'
+  ) +
+  theme(legend.position = 'top') 
+
+```
+
+U1的词汇量为253，U2的词汇量为322。
+
+```{r}
+library(ggvenn)
+
+tidy_books %>% 
+  select(book, word) %>% 
+  pivot_wider(
+    names_from = book,
+    values_from = word,
+    values_fn = list,
+  ) %>% 
+  map(~.x %>% pluck(1)) %>% 
+  ggvenn()
+
+```
+
+```{r}
+tidy_books %>% 
+  filter(type == 'normal') %>% 
+  count(book, word) %>% 
+  slice_max(
+    n,
+    n = 20,
+    by = book
+  ) %>% 
+  mutate(word = reorder_within(word, n, book)) %>% 
+  ggplot(aes(n, word)) +
+  geom_col(aes(fill = n), show.legend = F) +
+  scale_y_reordered() +
+  scale_x_continuous(
+    expand = c(0,0,.05,0)
+  ) +
+  scale_fill_viridis_c() +
+  labs(
+    title = 'top 20 normal words'
+  ) +
+  facet_wrap(~book, ncol = 2, scales = 'free')
+```
+
+U1和U2的出现最高的单词如图。
+
+```{r}
+library(ggwordcloud)
+
+tidy_books %>% 
+  filter(type == 'normal') %>% 
+  count(book, word) %>% 
+  ggplot(aes(label = word, size = n, color = n)) +
+  geom_text_wordcloud_area() +
+  scale_size_area(max_size = 10) +
+  scale_color_viridis_c() +
+  facet_wrap(~book) +
+  theme_minimal()
+```
+
+## tf_idf
+
+```{r}
+tidy_books %>% 
+  count(book, word) %>% 
+  bind_tf_idf(word, book, n) %>% 
+  group_by(book) %>% 
+  slice_max(tf_idf, n = 15) %>% 
+  ggplot(aes(tf_idf, fct_reorder(word, tf_idf), fill = book)) +
+  geom_col(show.legend = F) +
+  facet_wrap(~book, ncol = 2, scales = 'free')
+```
+
+```{r}
+tidy_books %>% 
+  anti_join(stop_words) %>% 
+  count(book, word) %>% 
+  bind_tf_idf(word, book, n) %>% 
+  group_by(book) %>% 
+  slice_max(tf_idf, n = 15) %>% 
+  ggplot(aes(tf_idf, fct_reorder(word, tf_idf), fill = book)) +
+  geom_col(show.legend = F) +
+  facet_wrap(~book, ncol = 2, scales = 'free')
+```
+
+## n-grams
+
+```{r}
+books_bigrams <- books_df %>% 
+  unnest_tokens(bigram, text, token = 'ngrams', n = 2) %>% 
+  filter(!is.na(bigram))
+```
+
+```{r}
+books_bigrams %>% 
+  count(bigram, sort = T)
+
+bigrams_sep  <- books_bigrams %>% 
+  separate(bigram, c('word1', 'word2'), sep = ' ')
+
+bigrams_filtered <- bigrams_sep %>% 
+  filter(!word1 %in% stop_words$word) %>% 
+  filter(!word2 %in% stop_words$word)
+
+bigrams_counts <- bigrams_filtered %>% 
+  count(word1, word2, sort = T)
+
+bigrams_counts
+
+bigrams_united <- bigrams_filtered %>%
+  unite(bigram, word1, word2, sep = " ")
+
+bigrams_united
+```
+
+```{r}
+bigram_tf_idf <- bigrams_united %>%
+  count(book, bigram) %>%
+  bind_tf_idf(bigram, book, n) %>%
+  arrange(desc(tf_idf))
+
+bigram_tf_idf %>% 
+  mutate(bigram = reorder_within(bigram, tf_idf, book)) %>% 
+  ggplot(aes(tf_idf, bigram, fill = book)) +
+  geom_col(show.legend = F) +
+  scale_y_reordered() +
+  facet_wrap(~book, scales = 'free')
+```
+
+## sentences
+
+```{r}
+sentences <- books_df %>% 
+  unnest_tokens(xxx, text, token = 'sentences', collapse = c("book", "title")) %>% 
+  count(book, xxx, sort = T)
+```
+
+```{r}
+library(gt)
+
+sentences %>% 
+  gt(groupname_col = 'book', row_group_as_column = T)
+```
