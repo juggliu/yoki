@@ -62,6 +62,9 @@ n_per_unit <- 30
 stage_days <- learn_event %>% 
   filter(where == "grape seed" & stage == !!stage) %>% 
   n_distinct()
+# 请假天数
+leave_days <- 2
+stage_days <- stage_days + leave_days
 stage_progress <- stage_days / n_per_unit
 
 cal_unspaced_days <- function() {
