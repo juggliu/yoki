@@ -178,12 +178,13 @@ bigrams_united
 ```
 
 ```{r}
-bigram_tf_idf <- bigrams_united %>%
+bigram_tf_idf <- books_bigrams %>%
   count(book, bigram) %>%
   bind_tf_idf(bigram, book, n) %>%
   arrange(desc(tf_idf))
 
-bigram_tf_idf %>% 
+bigram_tf_idf %>%
+  slice_max(tf_idf, n = 20, by = book) %>% 
   mutate(bigram = reorder_within(bigram, tf_idf, book)) %>% 
   ggplot(aes(tf_idf, bigram, fill = book)) +
   geom_col(show.legend = F) +
