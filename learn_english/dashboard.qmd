@@ -68,7 +68,11 @@ stage_days <- stage_days + leave_days
 stage_progress <- stage_days / n_per_unit
 
 cal_unspaced_days <- function() {
-  61
+  max(
+    (learn_event %>% pull(when) %>% last()) - ymd('2024-08-12'), 
+    ymd('2024-08-10') - ymd('2024-06-11')
+  ) %>% 
+    as.integer() + 1
 }
 
 ```
