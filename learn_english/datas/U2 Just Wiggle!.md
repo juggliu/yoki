@@ -13,12 +13,12 @@ eat our food, eat our food.
 This is the way we eat our food,
 early in the morning.
 This is the way we brush our teeth.
-brush our teeth, brush our teeth.
+Brush our teeth, brush our teeth.
 This is the way we brush our teeth,
 early in the morning.
 
 2. Just Wiggle!
-Just like a rabbit. JUmp like a tiger.
+Just like a rabbit. Jump like a tiger.
 Jump like a little kangaroo.
 Jump with your legs. Jump to the sky.
 Use your legs to jump up high!
@@ -59,9 +59,9 @@ two little lips with the teeth closed in.
 
 4. Ten Things
 I have one toothbrush in my hand.
-It keeps my teeth ver clean!
+It keeps my teeth very clean!
 I have two pockets in my pants.
-In them I keep many things!
+In them, I keep many things!
 I have three hats for me to wear.
 But I have only one head!
 I have four sweatshirts on my bed.
@@ -133,7 +133,7 @@ Hold hands with a friend
 and make a circle.
 Let's make a circle
 with a friend!
-Now walk in a a circle.
+Now walk in a circle.
 Walk in a circle.
 Let's walk in a circle,
 walking with our friends!
@@ -153,7 +153,7 @@ Now,
 tiptoe to your chair.
 Tiptoe to your chair.
 Tiptoe to your chair.
-and one, two, three--sit down.
+And one, two, three--sit down.
 Let's rock with a friend.
 Rock with a friend.
 Now rock with a friend,
@@ -199,7 +199,7 @@ and two legs to stand.
 I have two ears
 and two eyes that see.
 I have two of many things
-that make me, "me!"
+that make me, “me!“
 
 I have two arms.
 I have two hands.
@@ -211,7 +211,7 @@ and two eyes that see.
 I have two of many things,
 two of many things,
 I have two of many things,
-that make me, "me!"
+that make me, “me!“
 
 14. What Can You Do?
 Hello zebra, what can you do?
@@ -259,7 +259,7 @@ Your shoulders are too big!
 Hello, Mr. Elephant.
 You have a nice cap!
 But I cannot wear it.
-You head is too big!
+Your head is too big!
 Hello, Miss Turtle.
 You have a nice hat!
 But I cannot wear it.
@@ -283,9 +283,9 @@ Hello, Mr. Duck.
 You have nice pants!
 But I cannot wear them.
 Your legs are too short!
-"I like my shirt," said Little Monkey.
-"I like my shorts. My mother made
-them just for me!"
+“I like my shirt,“ said Little Monkey.
+“I like my shorts. My mother made
+them just for me!“
 
 17. Head, Shoulders, Knees and Toes
 Head, shoulders, knees and toes,
@@ -303,8 +303,8 @@ I play house.
 I am a girl.
 
 19. Mother Who Lives in a Boot
-I kwon a mother who lives in a boot, with buttons
-all over her floor. She use an umbrella to keep
+I know a mother who lives in a boot, with buttons
+all over her floor. She uses an umbrella to keep
 her dry and a zipper that zips for a door.
 She keeps her food in seven blue shoes.
 She eats with a spoon from a cap.
@@ -322,61 +322,61 @@ She goes for a walk in her long pajamas.
 She has a green comb on her head.
 Her hair is long and so is her chin.
 Her nose and her cheeks are red.
-I kwon a mother who lives in a boot.
+I know a mother who lives in a boot.
 
 20. Jonny Bear Goes to the Zoo
-"My name is Jonny Bear. This is my family.
+“My name is Jonny Bear. This is my family.
 And this is our baby bear, Teddy. I love my family.
-And they love me."
+And they love me.“
 
-"Jonny, let's go to the zoo! I want to see our animal friends
-today. Our friends will be happy. And we will have fun too."
-"Father, can we go to the zoo? Please?"
-"Yes, you can go."
-"Thank you, Father!"
+“Jonny, let's go to the zoo! I want to see our animal friends
+today. Our friends will be happy. And we will have fun too.“
+“Father, can we go to the zoo? Please?“
+“Yes, you can go.“
+“Thank you, Father!“
 
 Jonny and his brother go to the zoo. Brother Bear
 stands in line with the boys and girls.
-"Good morning, Brother Bear. How are you today?"
-"I am fine, thank you!"
+“Good morning, Brother Bear. How are you today?“
+“I am fine, thank you!“
 
-"Hello, giraffe. You are so tall.
-Can you sell all the animal at the zoo?"
-"Hello, animal friends! Do you want to
-come out and play?"
-"Oh, yes, they do!"
+“Hello, giraffe. You are so tall.
+Can you sell all the animal at the zoo?“
+“Hello, animal friends! Do you want to
+come out and play?“
+“Oh, yes, they do!“
 
-"Hello, little monkey! Please come down and
+“Hello, little monkey! Please come down and
 play with us. Big gorilla, under the three, come
-here! Let's sing and dance!"
+here! Let's sing and dance!“
 
-"Where are the zebras? Oh, there you are! Run, zebras,
-run fast! Then come back and play with us."
+“Where are the zebras? Oh, there you are! Run, zebras,
+run fast! Then come back and play with us.“
 
-"Wake up, lion and tiger! Do you want to play?"
-"No, they do not want to play. They want to sleep!"
+“Wake up, lion and tiger! Do you want to play?“
+“No, they do not want to play. They want to sleep!“
 
-"Look! The small panda like to sit in his chair."
-"Hello, small turtle. You are so short! The rabbit can
-jump over you!"
+“Look! The small panda like to sit in his chair.“
+“Hello, small turtle. You are so short! The rabbit can
+jump over you!“
 
-"Do not let the birds out. They
-will fly up high and fly away."
+“Do not let the birds out. They
+will fly up high and fly away.“
 
-"Do not let an alligator out.
+“Do not let an alligator out.
 He will crawl through the grass,
-and he will not come back."
+and he will not come back.“
 
-"Do not let a snake out.
+“Do not let a snake out.
 He will crawl away, too,
-or hide under a rock."
+or hide under a rock.“
 
-"Hello, big elephant. Can you find your red ball?"
-"Hello, hippopotamus. Do you want to come with us?"
+“Hello, big elephant. Can you find your red ball?“
+“Hello, hippopotamus. Do you want to come with us?“
 
-"What can we do? Oh, I know. I'll be your teacher!
+“What can we do? Oh, I know. I'll be your teacher!
 Let's all stand in a line. Now let's walk through the zoo.
-Take one step, now two, three, four..."
+Take one step, now two, three, four…“
 
 Do you know how to fly like a bird?
 Now hop like rabbit!
@@ -385,12 +385,12 @@ Now turn around, and clap your hands!
 Jump like kangaroo!
 And stop!
 
-"Jonny! Let't dance and sing."
-"Yes, let's all stand in a circle!"
+“Jonny! Let't dance and sing.“
+“Yes, let's all stand in a circle!“
 I'm happy to be at the zoo.
 I'm happy to be here with you.
 We sing and we dance.
 We like to do the things that we do at the zoo!
 Oh, I'm happy to have friends like you!
 
-"It is time to go home. Goodbye, friends."
+“It is time to go home. Goodbye, friends.“

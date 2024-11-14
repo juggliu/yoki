@@ -63,7 +63,7 @@ I see a girl looking back at me!
 5. Monkey
 Little monkey
 high up in the tree.
-please come down
+Please come down
 and play with me.
 
 6. Red
@@ -170,7 +170,7 @@ Fly like a bird in the sky.
 Jump, jump, jump like a kangaroo.
 Jump like a kangaroo at the zoo.
 Crawl, crawl, crawl like an alligator.
-Crawl like an alligator to to the rock.
+Crawl like an alligator to the rock.
 Run, run, run like a zebra.
 Run like a zebra at the zoo.
 Walk, walk, walk like an elephant.
@@ -195,7 +195,7 @@ See the family of hippos!
 The hippos walk in a circle.
 My family has fun at the zoo.
 The animals have fun at the zoo.
-We say "Goodbye" to the zoo!
+We say “Goodbye” to the zoo!
 
 Session 3
 16. Alphabet Song
@@ -203,7 +203,7 @@ A B C D E F G
 H I J K L M N
 O P Q R S T U
 V W X Y Z.
-Now we kwon our ABCs.
+Now we know our ABCs.
 Can we sign them
 once more please?
 
@@ -294,7 +294,7 @@ I've had a very good day!
 Goodbye, goodbye!
 Be careful on your way.
 
-24. Jonny Bear "This Is Me!"
+24. Jonny Bear “This Is Me!“
 Hello! I am Jonny Bear!
 This is my family.
 This is my father.

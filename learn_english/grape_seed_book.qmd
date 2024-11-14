@@ -69,17 +69,14 @@ tidy_books %>%
 U1的词汇量为253，U2的词汇量为322。
 
 ```{r}
-library(ggvenn)
+library(ggVennDiagram)
 
 tidy_books %>% 
-  select(book, word) %>% 
-  pivot_wider(
-    names_from = book,
-    values_from = word,
-    values_fn = list,
-  ) %>% 
-  map(~.x %>% pluck(1)) %>% 
-  ggvenn()
+  summarise(words = list(word), .by = book) %>% 
+  deframe() %>% 
+  ggVennDiagram(
+    force_upset = T
+  )
 
 ```
 
@@ -196,13 +193,21 @@ bigram_tf_idf %>%
 
 ```{r}
 sentences <- books_df %>% 
-  unnest_tokens(xxx, text, token = 'sentences', collapse = c("book", "title")) %>% 
-  count(book, xxx, sort = T)
+  unnest_tokens(sentence, text, token = 'sentences', collapse = c("book", "title")) %>% 
+  count(book, sentence)
 ```
 
 ```{r}
 library(gt)
 
 sentences %>% 
-  gt(groupname_col = 'book', row_group_as_column = T)
+  filter(n > 2) %>% 
+  group_by(book) %>% 
+  arrange(desc(n), .by_group = T) %>% 
+  gt(groupname_col = 'book', row_group_as_column = T) %>% 
+  data_color(
+    columns = n,
+    method = 'numeric',
+    palette = 'viridis'
+  )
 ```
