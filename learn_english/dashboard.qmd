@@ -25,13 +25,14 @@ learn_event %>%
   pointblank::expect_col_vals_not_null(
     columns = everything()
   )
+leave_event <- read_csv('datas/leave_event.csv')
 stage <- learn_event$stage %>% last()
 
 ```
 
 ## Row {scrolling="false"}
 
-My name is Yoki, currently studying at Grape Seed English School, in U2 stage. This is my learning english dashboard.
+My name is Yoki, currently studying at Grape Seed English School, in U3 stage. This is my learning English dashboard.
 
 ## Row
 
@@ -53,7 +54,7 @@ school_days <- learn_event %>%
   pull(when) %>% 
   n_distinct()
 
-# 从第4次开始上的课
+# 从U1第4次开始上的课
 u1_start <- 3
 # 每个单元30节课
 n_per_unit <- 30
@@ -62,8 +63,10 @@ n_per_unit <- 30
 stage_days <- learn_event %>% 
   filter(where == "grape seed" & stage == !!stage) %>% 
   n_distinct()
-# U2请假天数
-leave_days <- 4
+leave_days <- leave_event %>% 
+  filter(stage == !!stage) %>% 
+  pull(when) %>% 
+  n_distinct()
 stage_days <- stage_days + leave_days
 stage_progress <- stage_days / n_per_unit
 
@@ -128,7 +131,7 @@ list(
 ```{r}
 #| label: U2 progress
 #| content: valuebox
-#| title: "U2 progress"
+#| title: "U3 progress"
 
 val <- paste0(stage_days, 'd', '/', stage_progress %>% scales::percent())
 list(
