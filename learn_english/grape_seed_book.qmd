@@ -119,9 +119,69 @@ tidy_books %>%
   theme_minimal()
 ```
 
+## readability
+
+```{r}
+library(quanteda)
+library(quanteda.textstats)
+
+
+books_summary <- books_df %>% 
+  summarise(text = paste0(text, collapse = '\n'), .by = book)
+
+books_corpus <-books_summary %>% 
+  corpus(
+    docid_field = 'book',
+    text_field = 'text'
+  )
+
+measures <- c('Flesch', 'Flesch.Kincaid','Coleman.Liau.ECP', 'Coleman.Liau.grade', 'Coleman.Liau.short', 'ARI')
+books_readability <- books_corpus %>% 
+  textstat_readability(
+    measure = measures
+  )
+
+books_readability %>% 
+  pivot_longer(
+    cols = c(-document),
+    names_to = 'measure'
+  ) %>% 
+  mutate(document = str_split_i(document, ' ', 1)) %>% 
+  ggplot(aes(document, value)) +
+  geom_col(aes(fill = document), show.legend = F) +
+  ggsci::scale_fill_aaas() +
+  facet_wrap(~measure, scales = 'free_y')
+```
+
+## 语法
+
+```{r}
+library(udpipe)
+library(ggplot2)
+library(ggraph)
+library(igraph)
+
+# 下载预训练模型（例如英文模型）
+model <- udpipe_download_model(language = "english")
+ud_model <- udpipe_load_model(model$file_model)
+
+books_df %>% 
+  summarise(text = paste0(text, collapse = '\n'), .by = book)
+
+# 进行语法分析
+annotated <- udpipe_annotate(ud_model, x = books_summary$text, doc_id = books_summary$book)
+annotated_df <- as.data.frame(annotated)
+
+# 统计词性标注结果
+pos_counts <- annotated_df %>%
+  count(upos)
+
+```
+
 ## tf_idf
 
 ```{r}
+library(forcats)
 tidy_books %>% 
   count(book, word) %>% 
   bind_tf_idf(word, book, n) %>% 
