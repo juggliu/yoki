@@ -28,6 +28,8 @@ learn_event %>%
 leave_event <- read_csv('datas/leave_event.csv')
 stage <- learn_event$stage %>% last()
 
+cost_csv <- read_csv('datas/cost.csv')
+
 ```
 
 ## Row {scrolling="false"}
@@ -77,6 +79,11 @@ cal_unspaced_days <- function() {
   ) %>% 
     as.integer() + 1
 }
+
+cost <- cost_csv %>% 
+  replace_na(list(discount = 0)) %>% 
+  summarise(total = sum(price - discount)) %>% 
+  pull()
 
 ```
 
@@ -129,13 +136,27 @@ list(
 ```
 
 ```{r}
-#| label: U2 progress
+#| label: U3 progress
 #| content: valuebox
 #| title: "U3 progress"
 
 val <- paste0(stage_days, 'd', '/', stage_progress %>% scales::percent())
 list(
   icon = "backpack-fill",
+  #color = "#8DB6CD",
+  color = "secondary",
+  value = val
+)
+```
+
+```{r}
+#| label: cost
+#| content: valuebox
+#| title: "cost"
+
+val <- cost %>% scales::dollar(prefix = '')
+list(
+  icon = "currency-yen",
   #color = "#8DB6CD",
   color = "secondary",
   value = val
